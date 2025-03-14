@@ -53,7 +53,9 @@ export class AuthController {
     })
 
     reply.setCookie('token', userToken, {
-      expires: new Date(Date.now() + COOKIE_EXPIRES_IN), // Берем из констант кол-во миллисекунд и прибавляем к текущему времени
+      expires: new Date(Date.now() + COOKIE_EXPIRES_IN),
+      secure: true,
+      sameSite: 'none'
     });
     return reply.send(); // Просто ретурн не работает
   }
@@ -83,6 +85,8 @@ export class AuthController {
 
     reply.setCookie('token', newToken, {
       expires: new Date(Date.now() + COOKIE_EXPIRES_IN),
+      secure: true,
+      sameSite: 'none'
     });
     return reply.send(); // Просто ретурн не работает
   }

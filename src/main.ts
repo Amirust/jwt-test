@@ -24,6 +24,11 @@ async function bootstrap() {
     }),
   );
 
+  app.enableCors({
+    origin: configService.getOrThrow<string>('CORS_ORIGIN'),
+    credentials: true,
+  });
+
   await app.register(fastifyCookie, {
     secret: configService.getOrThrow<string>('COOKIE_SECRET'),
   });

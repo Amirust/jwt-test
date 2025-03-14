@@ -60,6 +60,7 @@ const verifyResponse = await fetch('http://localhost:3000/api/auth/verify', {
   headers: {
     'Content-Type': 'application/json',
   },
+  credentials: 'include',
   body: JSON.stringify({
     notSignedData,
     signedData,
@@ -67,3 +68,6 @@ const verifyResponse = await fetch('http://localhost:3000/api/auth/verify', {
   }),
 }); // Получаем дальше с куков новый токен
 ```
+
+## Если тестите постманом или браузером
+Не забудьте прописать в енв `CORS_ORIGIN` чтобы куки правильно ставились, бек уже настроен так, чтобы все работало
