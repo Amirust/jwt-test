@@ -1,7 +1,7 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { FastifyAdapter, NestFastifyApplication } from '@nestjs/platform-fastify';
-import { ValidationPipe } from '@nestjs/common';
+import { Logger, ValidationPipe } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import fastifyCookie from '@fastify/cookie';
 
@@ -11,6 +11,8 @@ async function bootstrap() {
   );
 
   const configService = app.get<ConfigService>(ConfigService);
+
+  const logger = new Logger('Bootstrap');
 
   // Ставим глобал префикс чтобы запросы шли на example.com/api/...
   app.setGlobalPrefix('api');
@@ -34,6 +36,8 @@ async function bootstrap() {
   });
 
   await app.listen(configService.getOrThrow('APP_PORT'), '0.0.0.0', () =>
-    console.log(`Server is running on port ${configService.get('APP_PORT')}`),)
+    logger.log(`Server is running on port ${configService.get('APP_PORT')}`)
+  )
 }
-bootstrap();
+
+void bootstrap();
