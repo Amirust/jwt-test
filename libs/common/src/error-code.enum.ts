@@ -1,4 +1,4 @@
-export enum ErrorCode {
+export enum ErrorCodeEnum {
   UNKNOWN = 0,
 
   AUTH_ERROR = 10000,

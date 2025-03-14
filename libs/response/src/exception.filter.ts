@@ -8,7 +8,7 @@ import {
 import { Response, ResponseError } from '@app/response/response.dto';
 import { FastifyReply } from 'fastify';
 import { instanceToPlain } from 'class-transformer';
-import { ErrorCode } from '@app/common/ErrorCode.enum';
+import { ErrorCodeEnum } from '@app/common/error-code.enum';
 
 @Catch()
 export class AllExceptionsFilter implements ExceptionFilter {
@@ -24,13 +24,13 @@ export class AllExceptionsFilter implements ExceptionFilter {
 
     if (exception instanceof HttpException) {
       const error = new ResponseError();
-      error.code = ErrorCode.UNKNOWN;
+      error.code = ErrorCodeEnum.UNKNOWN;
       error.message = exception.message;
       error.details = [];
 
       if (exception.getResponse() instanceof Object) {
         const body = exception.getResponse() as {
-          code?: ErrorCode;
+          code?: ErrorCodeEnum;
           details?: any[];
           message?: any;
         };

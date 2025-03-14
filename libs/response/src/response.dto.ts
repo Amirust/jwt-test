@@ -1,4 +1,4 @@
-import { ErrorCode } from '@app/common/ErrorCode.enum';
+import { ErrorCodeEnum } from '@app/common/error-code.enum';
 
 export class Response<T> {
   declare ok: boolean;
@@ -7,7 +7,7 @@ export class Response<T> {
 }
 
 export class ResponseError {
-  declare code: ErrorCode;
+  declare code: ErrorCodeEnum;
   declare message: string;
   declare details: any[];
 }

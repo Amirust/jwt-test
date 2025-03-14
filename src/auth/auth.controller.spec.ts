@@ -4,7 +4,7 @@ import { AuthService } from './auth.service';
 import { VerifyUserReplyDTO } from '../dto/VerifyUserReplyDTO';
 import { FastifyReply, FastifyRequest } from 'fastify';
 import { BadRequestException, NotFoundException } from '@nestjs/common';
-import { ErrorCode } from '@app/common/ErrorCode.enum';
+import { ErrorCodeEnum } from '@app/common/error-code.enum';
 import { ethers } from 'ethers';
 import { JwtModule } from '@nestjs/jwt';
 import { randomBytes } from 'node:crypto';
@@ -63,7 +63,7 @@ describe('AuthController', () => {
 
     expect(() => controller.verifySignature(payload, reply)).toThrow(
       new BadRequestException({
-        code: ErrorCode.INVALID_SIGNATURE,
+        code: ErrorCodeEnum.INVALID_SIGNATURE,
         message: 'Cannot verify signature',
       }),
     );
@@ -85,7 +85,7 @@ describe('AuthController', () => {
 
     expect(() => controller.refreshToken(request, reply)).toThrow(
       new BadRequestException({
-        code: ErrorCode.INVALID_TOKEN,
+        code: ErrorCodeEnum.INVALID_TOKEN,
         message: 'Token is not provided',
       }),
     );
@@ -101,7 +101,7 @@ describe('AuthController', () => {
 
     expect(() => controller.refreshToken(request, reply)).toThrow(
       new NotFoundException({
-        code: ErrorCode.USER_NOT_FOUND,
+        code: ErrorCodeEnum.USER_NOT_FOUND,
         message: 'User not found',
       }),
     );

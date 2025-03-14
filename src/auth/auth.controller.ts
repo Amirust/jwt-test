@@ -13,13 +13,12 @@ import {
 import { AuthService } from './auth.service';
 import { ObjectToSignDTO } from '../dto/ObjectToSignDTO';
 import { VerifyUserReplyDTO } from '../dto/VerifyUserReplyDTO';
-import { ErrorCode } from '@app/common/ErrorCode.enum';
+import { ErrorCodeEnum } from '@app/common/error-code.enum';
 import { FastifyReply, FastifyRequest } from 'fastify';
 import { COOKIE_EXPIRES_IN } from '@app/common/constants';
 
 @Controller('auth')
 export class AuthController {
-  // Массив кошельков которые создали токен, чтобы не создавать базу данных
   public userWallets: string[] = [];
 
   constructor(
@@ -42,7 +41,7 @@ export class AuthController {
 
     if (!isVerified)
       throw new BadRequestException({
-        code: ErrorCode.INVALID_SIGNATURE,
+        code: ErrorCodeEnum.INVALID_SIGNATURE,
         message: 'Cannot verify signature'
       });
 
@@ -66,7 +65,7 @@ export class AuthController {
 
     if (!oldToken)
       throw new BadRequestException({
-        code: ErrorCode.INVALID_TOKEN,
+        code: ErrorCodeEnum.INVALID_TOKEN,
         message: 'Token is not provided'
       });
 
@@ -74,7 +73,7 @@ export class AuthController {
 
     if (!this.userWallets.includes(decoded.wallet))
       throw new NotFoundException({
-        code: ErrorCode.USER_NOT_FOUND,
+        code: ErrorCodeEnum.USER_NOT_FOUND,
         message: 'User not found'
       });
 
