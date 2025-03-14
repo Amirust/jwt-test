@@ -16,6 +16,20 @@
     "noImplicitAny": false,
     "strictBindCallApply": false,
     "forceConsistentCasingInFileNames": false,
-    "noFallthroughCasesInSwitch": false
+    "noFallthroughCasesInSwitch": false,
+    "paths": {
+      "@app/response": [
+        "libs/response/src"
+      ],
+      "@app/response/*": [
+        "libs/response/src/*"
+      ],
+      "@app/common": [
+        "libs/common/src"
+      ],
+      "@app/common/*": [
+        "libs/common/src/*"
+      ]
+    }
   }
 }
